@@ -1,20 +1,21 @@
 import React from 'react';
 import ContentHeader from '../../components/ContentHeader';
-import SelectInput from '../../shared/SelectInput';
-import { Container } from './styles';
+import FinanceCard from '../../shared/FinanceCard';
+import { Container, Content } from './styles';
 
 
 //FC = funcional componente
 const List: React.FC = () => {
-    const options = [
-        { value: '0', label: 'Carro' },
-        { value: '1', label: 'Moto' }
-    ]
+
     return (
         <Container>
-            <ContentHeader title='Dashboard' lineColor='red'>
-                <SelectInput options={options} />
+            <ContentHeader title='Saida' lineColor='red'>
             </ContentHeader>
+
+            <Content>
+                <FinanceCard color='#313862' tagColor='#E44C4E' title='Conta de Luz'
+                    subTitle='07/07/2020' amount='R$ 130,00' />
+            </Content>
         </Container>
     );
 }

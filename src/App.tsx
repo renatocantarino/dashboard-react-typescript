@@ -8,6 +8,7 @@ import Layout from './components/Layout'
 import dark from './styles/themes/dark'
 import light from './styles/themes/light'
 import Dashboard from './pages/Dashboard';
+import List from './pages/List';
 
 
 const App: React.FC = () => {
@@ -15,7 +16,7 @@ const App: React.FC = () => {
         <ThemeProvider theme={dark}>
             <GlobalStyles />
             <Layout>
-                <Dashboard />
+                <List />
             </Layout>
         </ThemeProvider>
     );

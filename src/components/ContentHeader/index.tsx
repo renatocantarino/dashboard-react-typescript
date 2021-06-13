@@ -6,9 +6,6 @@ interface IContentHeaderProps {
     title: string
     lineColor: string
     children: React.ReactNode
-
-
-
 }
 
 //FC = funcional componente
