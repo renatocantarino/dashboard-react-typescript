@@ -1,10 +1,24 @@
 import React from 'react';
+import ContentHeader from '../../components/ContentHeader';
+import SelectInput from '../../shared/SelectInput';
+
+
+import { Container } from './styles';
 
 
 //FC = funcional componente
 const Dashboard: React.FC = () => {
+
+    const options = [
+        { value: '0', label: 'Carro' },
+        { value: '1', label: 'Moto' }
+    ]
     return (
-        <h1>Dashboard</h1>
+        <Container>
+            <ContentHeader title='Dashboard' lineColor='#fff'>
+                <SelectInput options={options} />
+            </ContentHeader>
+        </Container>
     );
 }
 
