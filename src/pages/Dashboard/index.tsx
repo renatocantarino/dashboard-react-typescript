@@ -1,6 +1,7 @@
 import React from 'react';
 import ContentHeader from '../../components/ContentHeader';
 import SelectInput from '../../shared/SelectInput';
+import { Meses, Anos } from '../../Utils/Dates'
 
 
 import { Container } from './styles';
@@ -8,15 +9,11 @@ import { Container } from './styles';
 
 //FC = funcional componente
 const Dashboard: React.FC = () => {
-
-    const options = [
-        { value: '0', label: 'Carro' },
-        { value: '1', label: 'Moto' }
-    ]
     return (
         <Container>
             <ContentHeader title='Dashboard' lineColor='#fff'>
-                <SelectInput options={options} />
+                <SelectInput options={Meses} />
+                <SelectInput options={Anos} />
             </ContentHeader>
         </Container>
     );

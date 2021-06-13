@@ -2,15 +2,15 @@ import React from 'react';
 import { Container, Tag } from "./styles";
 
 declare interface ICardProps {
-    color: string
+    //color: string
     tagColor: string
     title: string
     subTitle: string
     amount: string
 }
 
-const FinanceCard: React.FC<ICardProps> = ({ color, tagColor, title, subTitle, amount }) => (
-    <Container color={color}>
+const FinanceCard: React.FC<ICardProps> = ({ tagColor, title, subTitle, amount }) => (
+    <Container>
         <Tag color={tagColor} />
         <div>
             <span>{title}</span>
