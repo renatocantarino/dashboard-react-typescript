@@ -29,7 +29,12 @@ export const Container = styled.li`
         flex-direction: column;
         justify-content: space-between;
         padding-left: 10px;
-    }    
+    } 
+
+    > div span{
+        font-weight: 500;
+        font-size: 22px;
+    }   
 `;
 
 export const Tag = styled.div<ITagProps>`   
