@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import emojis from '../../Utils/emoji';
+import Emojis from '../../Utils/Emoji';
 import Toggle from '../Toggle';
 import {
     Container,
@@ -13,8 +13,8 @@ import {
 const MainHeader: React.FC = () => {
 
     const emoji = useMemo(() => {
-        const index = Math.floor(Math.random() * emojis.length);
-        return emojis[index];
+        const index = Math.floor(Math.random() * Emojis.length);
+        return Emojis[index];
     }, [])
 
     return (

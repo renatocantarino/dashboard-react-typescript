@@ -6,9 +6,11 @@ import SelectInput from '../../shared/SelectInput';
 import gains from '../../repositories/gains';
 import expenses from '../../repositories/expenses';
 
-
 import { Container, Content, Filters } from './styles';
 import { Meses, Anos } from '../../Utils/Dates'
+
+import formatCurrency from '../../Utils/FormatCurrency';
+import formatDate from '../../Utils/FormatDate';
 
 
 
@@ -53,9 +55,9 @@ const List: React.FC<IRouteParams> = ({ match }) => {
             return {
                 id: String(Math.random() * listMemo.length),
                 description: item.description,
-                amountFormatted: item.amount,
+                amountFormatted: formatCurrency(Number(item.amount)),
                 frequency: item.frequency,
-                dateFormatted: item.date,
+                dateFormatted: formatDate(item.date),
                 tagColor: item.frequency === 'recorrente' ? "#4E41F0" : "#E44C4E"
             }
         })
@@ -85,12 +87,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
                         tagColor={item.tagColor}
                         title={item.description}
                         subTitle={item.dateFormatted}
-                        amount={new Intl.NumberFormat('pt-BR', {
-                            style: 'currency',
-                            currency: 'BRL',
-                            minimumFractionDigits: 2
-                        })
-                            .format(Number(item.amountFormatted))} />))
+                        amount={item.amountFormatted} />))
                 }
 
             </Content>
