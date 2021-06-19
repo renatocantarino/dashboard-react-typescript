@@ -13,16 +13,13 @@ import { Meses, GetCurrentMonth, GetCurrentYear } from '../../Utils/Dates'
 import formatCurrency from '../../Utils/FormatCurrency';
 import formatDate from '../../Utils/FormatDate';
 
-
-
-
 interface IRouteParams {
     match: {
         params: { type: string }
     }
 }
 
-interface IData {
+interface IMockData {
     id: string;
     description: string;
     amountFormatted: string;
@@ -35,7 +32,7 @@ interface IData {
 //FC = funcional componente
 const List: React.FC<IRouteParams> = ({ match }) => {
 
-    const [data, setData] = useState<IData[]>([]);
+    const [data, setData] = useState<IMockData[]>([]);
     const [mesSelecionado, setMesSelecionado] = useState<string>(GetCurrentMonth());
     const [anoSelecionado, setAnoSelecionado] = useState<string>(GetCurrentYear());
     const [frequencia, setFrequencia] = useState<string[]>(['recorrente', 'eventual']);
@@ -43,17 +40,19 @@ const List: React.FC<IRouteParams> = ({ match }) => {
 
     const { type } = match.params;
 
-    const listMemo = useMemo(() => {
-        return type === 'entries' ? gains : expenses
-    }, [type]);
+    const pageParams = useMemo(() => {
+        return type === 'entries'
+            ? { title: 'Entradas', lineColor: '#F7931B', data: gains }
+            : { title: 'Saidas', lineColor: '#E44C4E', data: expenses };
+    }, [type])
 
 
     const Anos = useMemo(() => {
         let uniqueYears: number[] = [];
-        listMemo.forEach(item => {
-            const data = new Date(item.date);
-            const year = data.getFullYear();
 
+        pageParams.data.forEach(item => {
+
+            const year = new Date(item.date).getFullYear();
             if (!uniqueYears.includes(year))
                 uniqueYears.push(year)
         });
@@ -64,7 +63,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
                 label: year
             }
         });
-    }, [listMemo]);
+    }, [pageParams.data]);
 
     const meses = useMemo(() => {
         return Meses.map((item) => {
@@ -74,13 +73,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
             }
         });
 
-    }, [])
-
-    const pageParam = useMemo(() => {
-        return type === 'entries'
-            ? { title: 'Entradas', lineColor: '#F7931B' }
-            : { title: 'Saidas', lineColor: '#E44C4E' };
-    }, [type])
+    }, []);
 
     const handleFrenquencia = (tipoFrequencia: string) => {
         const selected = frequencia.findIndex(it => it === tipoFrequencia);
@@ -95,7 +88,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
     }
 
     useEffect(() => {
-        const filtered = listMemo.filter(item => {
+        const filtered = pageParams.data.filter(item => {
             //filtro por mes e ano
             const data = new Date(item.date)
             const month = String(data.getMonth() + 1);
@@ -106,7 +99,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
 
         const formated = filtered.map(item => {
             return {
-                id: String(Math.random() * listMemo.length),
+                id: String(Math.random() * pageParams.data.length),
                 description: item.description,
                 amountFormatted: formatCurrency(Number(item.amount)),
                 frequency: item.frequency,
@@ -115,32 +108,40 @@ const List: React.FC<IRouteParams> = ({ match }) => {
             }
         })
         setData(formated)
-    }, [listMemo, mesSelecionado, anoSelecionado, frequencia])
+    }, [pageParams.data, mesSelecionado, anoSelecionado, frequencia])
 
     return (
         <Container>
-            <ContentHeader title={pageParam.title} lineColor={pageParam.lineColor}>
-                <SelectInput options={meses} defaultValue={mesSelecionado} onChange={(e) => setMesSelecionado(e.target.value)} />
-                <SelectInput options={Anos} defaultValue={anoSelecionado} onChange={(e) => setAnoSelecionado(e.target.value)} />
+            <ContentHeader title={pageParams.title} lineColor={pageParams.lineColor}>
+                <SelectInput
+                    options={meses}
+                    defaultValue={mesSelecionado}
+                    onChange={(e) => setMesSelecionado(e.target.value)} />
+
+                <SelectInput
+                    options={Anos}
+                    defaultValue={anoSelecionado}
+                    onChange={(e) => setAnoSelecionado(e.target.value)} />
             </ContentHeader>
 
             <Filters>
-                <button type='button' onClick={() => handleFrenquencia('eventual')}
-                    className={`tag-filter tag-recorrente
-                                 ${frequencia.includes('eventual') && 'tag-actived'}`}>
+                <button
+                    type='button'
+                    onClick={() => handleFrenquencia('eventual')}
+                    className={`tag-filter tag-recorrente  ${frequencia.includes('eventual') && 'tag-actived'}`}>
                     Eventuais
                 </button>
 
-                <button type='button' onClick={() => handleFrenquencia('recorrente')}
-                    className={`tag-filter tag-eventual
-                   ${frequencia.includes('recorrente') && 'tag-actived'}`}>
+                <button
+                    type='button'
+                    onClick={() => handleFrenquencia('recorrente')}
+                    className={`tag-filter tag-eventual ${frequencia.includes('recorrente') && 'tag-actived'}`}>
                     Recorrentes</button>
 
             </Filters>
 
             <Content>
                 {
-
                     data.length ? data.map(item => (<FinanceCard
                         key={item.id}
                         tagColor={item.tagColor}
