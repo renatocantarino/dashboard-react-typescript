@@ -44,7 +44,17 @@ const Anos = [
     { value: 2021, label: '2021' }
 ]
 
+const GetCurrentMonth = (): string => {
+    return String(new Date().getMonth() + 1);
+
+}
+
+const GetCurrentYear = (): string => {
+    return String(new Date().getFullYear());
+
+}
 
 
 
-export { Meses, Anos }
+
+export { Meses, Anos, GetCurrentMonth, GetCurrentYear }

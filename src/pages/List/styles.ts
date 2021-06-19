@@ -1,12 +1,7 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  
-`;
-
-export const Content = styled.div`
- 
-`;
+export const Container = styled.div``;
+export const Content = styled.main``;
 
 export const Filters = styled.div`
         width: 100%;
@@ -22,12 +17,11 @@ export const Filters = styled.div`
 
         margin: 0 10px;
         transition: opacity .3s;
+        opacity: .4;
         
         :hover{
             opacity: .7;
-        }
-
-       
+        }       
     } 
 
     .tag-recorrente::after{
@@ -38,7 +32,6 @@ export const Filters = styled.div`
             border-bottom: 10px solid   ${props => props.theme.colors.warning};
         }
 
-
         .tag-eventual::after{
             content: '';
             display: block;
@@ -46,9 +39,8 @@ export const Filters = styled.div`
             margin: 0 auto;
             border-bottom: 10px solid   ${props => props.theme.colors.sucess};
         }
+
+        .tag-actived {
+            opacity: 1;
+        }
 `;
-
-
-
-
-

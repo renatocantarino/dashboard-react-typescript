@@ -12,8 +12,8 @@ const Dashboard: React.FC = () => {
     return (
         <Container>
             <ContentHeader title='Dashboard' lineColor='#fff'>
-                <SelectInput options={Meses} />
-                <SelectInput options={Anos} />
+                <SelectInput options={Meses} onChange={() => { }} />
+                <SelectInput options={Anos} onChange={() => { }} />
             </ContentHeader>
         </Container>
     );
