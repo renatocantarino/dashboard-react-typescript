@@ -33,8 +33,8 @@ interface IMockData {
 const List: React.FC<IRouteParams> = ({ match }) => {
 
     const [data, setData] = useState<IMockData[]>([]);
-    const [mesSelecionado, setMesSelecionado] = useState<string>(GetCurrentMonth());
-    const [anoSelecionado, setAnoSelecionado] = useState<string>(GetCurrentYear());
+    const [mesSelecionado, setMesSelecionado] = useState<number>(GetCurrentMonth());
+    const [anoSelecionado, setAnoSelecionado] = useState<number>(GetCurrentYear());
     const [frequencia, setFrequencia] = useState<string[]>(['recorrente', 'eventual']);
 
 
@@ -84,15 +84,24 @@ const List: React.FC<IRouteParams> = ({ match }) => {
         }
         else
             setFrequencia((prev) => [...prev, tipoFrequencia]);
+    }
 
+    const handleMonthSelected = (month: string) => {
+        const parseMonth = Number(month);
+        setMesSelecionado(parseMonth);
+    }
+
+    const handleYearSelected = (year: string) => {
+        const parseYear = Number(year);
+        setAnoSelecionado(parseYear)
     }
 
     useEffect(() => {
         const filtered = pageParams.data.filter(item => {
             //filtro por mes e ano
             const data = new Date(item.date)
-            const month = String(data.getMonth() + 1);
-            const year = String(data.getFullYear());
+            const month = data.getMonth() + 1;
+            const year = data.getFullYear();
 
             return month === mesSelecionado && year === anoSelecionado && frequencia.includes(item.frequency)
         })
@@ -116,12 +125,12 @@ const List: React.FC<IRouteParams> = ({ match }) => {
                 <SelectInput
                     options={meses}
                     defaultValue={mesSelecionado}
-                    onChange={(e) => setMesSelecionado(e.target.value)} />
+                    onChange={(e) => handleMonthSelected(e.target.value)} />
 
                 <SelectInput
                     options={Anos}
                     defaultValue={anoSelecionado}
-                    onChange={(e) => setAnoSelecionado(e.target.value)} />
+                    onChange={(e) => handleYearSelected(e.target.value)} />
             </ContentHeader>
 
             <Filters>

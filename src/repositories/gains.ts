@@ -6,8 +6,8 @@ export default [
     { "description": "Freela site", "amount": "900.23", "type": "entrada", "frequency": "eventual", "date": "2021-02-21" },
     { "description": "Freela app", "amount": "950.92", "type": "entrada", "frequency": "eventual", "date": "2021-02-23" },
     { "description": "Salário", "amount": "2500.25", "type": "entrada", "frequency": "recorrente", "date": "2021-03-10" },
-    { "description": "Salário", "amount": "2500.18", "type": "entrada", "frequency": "recorrente", "date": "2021-04-10" },
-    { "description": "Salário", "amount": "2500.15", "type": "entrada", "frequency": "recorrente", "date": "2021-05-10" },
-    { "description": "Salário", "amount": "2500.12", "type": "entrada", "frequency": "recorrente", "date": "2021-06-10" },
-    { "description": "Salário", "amount": "2500.00", "type": "entrada", "frequency": "recorrente", "date": "2021-07-10" },
+    { "description": "Salário", "amount": "3500.18", "type": "entrada", "frequency": "recorrente", "date": "2021-04-10" },
+    { "description": "Salário", "amount": "3100.15", "type": "entrada", "frequency": "recorrente", "date": "2021-05-10" },
+    { "description": "Salário", "amount": "1870.12", "type": "entrada", "frequency": "recorrente", "date": "2021-06-10" },
+    { "description": "Salário", "amount": "5200.00", "type": "entrada", "frequency": "recorrente", "date": "2021-07-10" },
 ]

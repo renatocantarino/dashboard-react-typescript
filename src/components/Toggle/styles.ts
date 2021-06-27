@@ -18,6 +18,6 @@ export const Selector = styled(Switch).attrs<ReactSwitchProps>(
 
     })
 ) <ReactSwitchProps>`
-margin: 0 7px; ;
+margin: 0 7px; 
    
     `;
