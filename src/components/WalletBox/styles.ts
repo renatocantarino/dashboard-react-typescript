@@ -23,7 +23,7 @@ export const Container = styled.div<IContainerProps>`
      position: absolute;
      top: -10px;
      right: -30px;
-     opacity: .3;
+     opacity: .6;
   }
 
   > span  {
