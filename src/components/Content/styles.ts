@@ -11,13 +11,15 @@ export const Container = styled.div`
     overflow-y: scroll;
 
     ::-webkit-scrollbar{
-        width: 8px;
-
+        width: 10px;
     }
     ::-webkit-scrollbar-thumb{
-        background: ${props => props.theme.colors.gray} ;
+        background: ${props => props.theme.colors.secondary} ;
         border-radius: 5px;
+    }
 
+    ::-webkit-scrollbar-track{
+        background: ${props => props.theme.colors.tertiary};        
     }
 `;
 
