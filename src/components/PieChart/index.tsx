@@ -2,7 +2,6 @@ import React from 'react';
 import {
     PieChart,
     Pie,
-    Tooltip,
     Cell,
     ResponsiveContainer
 } from 'recharts'

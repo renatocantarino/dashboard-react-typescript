@@ -185,11 +185,19 @@ const Dashboard: React.FC = () => {
 
                 return {
                     monthNumber: month,
-                    month: Meses[month].label,
+                    month: Meses[month].label.substr(0, 3),
                     amountEntry,
                     amountOutput
                 }
             })
+            .filter(item => {
+                const currentMonth = new Date().getMonth();
+                const currentYear = new Date().getUTCFullYear();
+                return (anoSelecionado === currentYear
+                    && item.monthNumber <= currentMonth)
+                    || (anoSelecionado < currentYear)
+
+            });
     }, [anoSelecionado]);
 
 

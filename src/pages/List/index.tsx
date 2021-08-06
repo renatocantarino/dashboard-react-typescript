@@ -86,6 +86,9 @@ const List: React.FC<IRouteParams> = ({ match }) => {
             setFrequencia((prev) => [...prev, tipoFrequencia]);
     }
 
+
+
+
     const handleMonthSelected = (month: string) => {
         const parseMonth = Number(month);
         setMesSelecionado(parseMonth);
@@ -100,10 +103,12 @@ const List: React.FC<IRouteParams> = ({ match }) => {
         const filtered = pageParams.data.filter(item => {
             //filtro por mes e ano
             const data = new Date(item.date)
-            const month = data.getMonth() + 1;
+            const month = data.getMonth();
             const year = data.getFullYear();
 
-            return month === mesSelecionado && year === anoSelecionado && frequencia.includes(item.frequency)
+            return month === mesSelecionado
+                && year === anoSelecionado
+                && frequencia.includes(item.frequency)
         })
 
         const formated = filtered.map(item => {
@@ -150,6 +155,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
             </Filters>
 
             <Content>
+
                 {
                     data.length ? data.map(item => (<FinanceCard
                         key={item.id}
@@ -166,4 +172,6 @@ const List: React.FC<IRouteParams> = ({ match }) => {
 
 
 export default List;
+
+
 
