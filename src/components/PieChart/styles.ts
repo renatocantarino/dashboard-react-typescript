@@ -36,7 +36,7 @@ export const Container = styled.div`
 `;
 
 export const SideLeft = styled.aside`
-    padding: 30px 20px;
+    padding: 10px 20px;
     > h2 {
         margin-bottom: 20px;
     }

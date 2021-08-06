@@ -1,6 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import ContentHeader from '../../components/ContentHeader';
 import SelectInput from '../../shared/SelectInput';
+
+
+
+
 import { Meses, GetCurrentMonth, GetCurrentYear } from '../../Utils/Dates'
 
 import gains from '../../repositories/gains';
@@ -9,11 +13,12 @@ import expenses from '../../repositories/expenses';
 
 import { Container, Content } from './styles';
 import WalletBox from '../../components/WalletBox';
-
+import PieCharts from '../../components/PieChart';
+import HistoryCharts from '../../components/HistoryBox';
 import MessageBox from '../../components/MessageBox';
 import happy from '../../assets/happy.svg';
 import sad from '../../assets/sad.svg';
-import PieCharts from '../../components/PieChart';
+
 
 
 
@@ -120,6 +125,7 @@ const Dashboard: React.FC = () => {
             'já pensou em investir em hinode?')
 
     }, [totalBalance]);
+
     const ExpensesXGains = useMemo(() => {
         const total = totalGains + totalExpense;
         const percentGains = (totalGains / total) * 100;
@@ -139,6 +145,54 @@ const Dashboard: React.FC = () => {
 
         return data;
     }, [totalGains, totalExpense]);
+
+
+    const historyData = useMemo(() => {
+
+        return Meses
+            .map((_, month) => {
+
+                let amountEntry = 0;
+                gains.forEach(gain => {
+                    const date = new Date(gain.date);
+                    const gainMonth = date.getMonth();
+                    const gainYear = date.getFullYear();
+
+                    if (gainMonth === month && gainYear === anoSelecionado) {
+                        try {
+                            amountEntry += Number(gain.amount);
+                        } catch {
+                            throw new Error('amountEntry is invalid. amountEntry must be valid number.')
+                        }
+                    }
+                });
+
+                let amountOutput = 0;
+                expenses.forEach(expense => {
+                    const date = new Date(expense.date);
+                    const expenseMonth = date.getMonth();
+                    const expenseYear = date.getFullYear();
+
+                    if (expenseMonth === month && expenseYear === anoSelecionado) {
+                        try {
+                            amountOutput += Number(expense.amount);
+                        } catch {
+                            throw new Error('amountOutput is invalid. amountOutput must be valid number.')
+                        }
+                    }
+                });
+
+
+                return {
+                    monthNumber: month,
+                    month: Meses[month].label,
+                    amountEntry,
+                    amountOutput
+                }
+            })
+    }, [anoSelecionado]);
+
+
 
     const handleMonthSelected = (month: string) => {
         const parseMonth = Number(month);
@@ -194,6 +248,7 @@ const Dashboard: React.FC = () => {
                     footerText={message.footerText} />
 
                 <PieCharts data={ExpensesXGains} />
+                <HistoryCharts data={historyData} lineColorAmountEntry="#E44C4E" lineColorAmountOutput="#F7931B" />
 
             </Content>
         </Container>
