@@ -118,23 +118,24 @@ const Dashboard: React.FC = () => {
             });
 
         const total = amountRecurrent + amountEventual;
+        const recurrentPercentage = Number(((amountRecurrent / total) * 100).toFixed(1));
+        const eventualPercentage = Number(((amountEventual / total) * 100).toFixed(1));
         return [
             {
                 label: 'Recorrentes',
                 amount: amountRecurrent,
-                percent: Number(((amountRecurrent / total) * 100).toFixed(1)),
+                percent: recurrentPercentage ? recurrentPercentage : 0,
                 color: '#F7931B'
             },
             {
 
                 label: 'Eventuais',
                 amount: amountEventual,
-                percent: Number(((amountEventual / total) * 100).toFixed(1)),
+                percent: eventualPercentage ? eventualPercentage : 0,
                 color: '#E44C4E'
             }
         ]
     }, [mesSelecionado, anoSelecionado]);
-
 
     const relationExpenseRecurrenteVersusEventuais = useMemo(() => {
         let amountRecurrent = 0;
@@ -158,18 +159,20 @@ const Dashboard: React.FC = () => {
             });
 
         const total = amountRecurrent + amountEventual;
+        const recurrentPercentage = Number(((amountRecurrent / total) * 100).toFixed(1));
+        const eventualPercentage = Number(((amountEventual / total) * 100).toFixed(1));
         return [
             {
                 label: 'Recorrentes',
                 amount: amountRecurrent,
-                percent: Number(((amountRecurrent / total) * 100).toFixed(1)),
+                percent: recurrentPercentage ? recurrentPercentage : 0,
                 color: '#F7931B'
             },
             {
 
                 label: 'Eventuais',
                 amount: amountEventual,
-                percent: Number(((amountEventual / total) * 100).toFixed(1)),
+                percent: eventualPercentage ? eventualPercentage : 0,
                 color: '#E44C4E'
             }
         ]
@@ -203,17 +206,17 @@ const Dashboard: React.FC = () => {
 
     const ExpensesXGains = useMemo(() => {
         const total = totalGains + totalExpense;
-        const percentGains = (totalGains / total) * 100;
-        const percentExpense = (totalExpense / total) * 100;
+        const percentGains = Number(((totalGains / total) * 100).toFixed(1));
+        const percentExpense = Number(((totalExpense / total) * 100).toFixed(1));
         const data = [
             {
                 name: 'Entrada',
-                value: Number(percentGains.toFixed(1)),
+                value: percentGains ? percentGains : 0,
                 color: '#E44C4E'
             },
             {
                 name: 'Saida',
-                value: Number(percentExpense.toFixed(1)),
+                value: percentExpense ? percentExpense : 0,
                 color: '#F7931B'
             }
         ]

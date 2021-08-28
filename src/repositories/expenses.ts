@@ -24,6 +24,7 @@ export default [
     { "description": "Energia elétrica", "amount": "75.99", "type": "saída", "frequency": "recorrente", "date": "2020-04-10" },
     { "description": "Água", "amount": "80.33", "type": "saída", "frequency": "recorrente", "date": "2020-04-15" },
     { "description": "Telefone", "amount": "99.99", "type": "saída", "frequency": "recorrente", "date": "2020-04-23" },
+    { "description": "Cursos", "amount": "250.20", "type": "saída", "frequency": "recorrente", "date": "2020-04-15" },
     { "description": "Plano de Saúde", "amount": "300.00", "type": "saída", "frequency": "recorrente", "date": "2020-04-23" },
     { "description": "Compras do mês", "amount": "600.00", "type": "saída", "frequency": "recorrente", "date": "2020-04-25" },
     { "description": "Parcela do Celular 3/5", "amount": "150.99", "type": "saída", "frequency": "eventual", "date": "2021-04-26" },

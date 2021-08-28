@@ -17,12 +17,12 @@ interface ChartProps {
 }
 //FC = funcional componente
 const PieCharts: React.FC<ChartProps> = ({ data }) => (
+
     <Container>
         <SideLeft>
             <h2>Relação</h2>
             <LegendContainer>
                 {
-
                     data.map((indicator) => (
                         <Legend key={indicator.name} color={indicator.color}>
                             <div>{indicator.value}%</div>
